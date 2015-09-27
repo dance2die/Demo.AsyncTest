@@ -9,11 +9,32 @@ namespace Demo.AsyncTest.AsyncAwait
 	{
 		public static void Main(string[] args)
 		{
-			var responseString = AsyncContext.Run(GetResponseString);
+			//TestResponseString();
 
-			Console.WriteLine(responseString);
+			TestCustomAsyncMethod();
 
 			Console.Read();
+		}
+
+		private static void TestCustomAsyncMethod()
+		{
+			var text = AsyncContext.Run(GetSomeText);
+			Console.WriteLine(text);
+		}
+
+		private static Task<string> GetSomeText()
+		{
+			// https://msdn.microsoft.com/en-us/library/hh873177(v=vs.110).aspx
+			var tcs = new TaskCompletionSource<string>();
+			tcs.SetResult("some text");
+
+			return tcs.Task;
+		}
+
+		private static void TestResponseString()
+		{
+			var responseString = AsyncContext.Run(GetResponseString);
+			Console.WriteLine(responseString);
 		}
 
 		private async static Task<string> GetResponseString()
