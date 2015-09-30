@@ -5,6 +5,7 @@ using Nito.AsyncEx;
 
 namespace Demo.AsyncTest.AsyncAwait
 {
+
 	public class Program
 	{
 		public static void Main(string[] args)
@@ -28,6 +29,7 @@ namespace Demo.AsyncTest.AsyncAwait
 			{
 				for (int i = 0; i < upto; i++)
 				{
+					Task.Delay(1000);
 					Console.WriteLine(i + 1);
 				}
 			});
