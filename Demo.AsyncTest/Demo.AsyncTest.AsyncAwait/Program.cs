@@ -14,11 +14,46 @@ namespace Demo.AsyncTest.AsyncAwait
 		{
 			//TestResponseString();
 			//TestCustomAsyncMethod();
+			//TestCountTo();
 
-			TestCountTo();
+			TestFirstToRespond();
 
 			Console.Read();
 		}
+
+		private static void TestFirstToRespond()
+		{
+			AsyncContext.Run(async () =>
+			{
+				string firstToRespondAsync = await GetFirstToRespondAsync();
+				Console.WriteLine(firstToRespondAsync);
+			});
+		}
+
+		public static async Task<string> GetFirstToRespondAsync()
+		{
+			// Call two web services; take the first response.
+			Task<string>[] tasks = { WebService1Async(), WebService2Async() };
+
+			// Await for the first one to respond.
+			Task<string> firstTask = await Task.WhenAny(tasks);
+
+			// Return the result.
+			return await firstTask;
+		}
+
+		private static async Task<string> WebService1Async()
+		{
+			await Task.Delay(1000);
+			return nameof(WebService1Async);
+		}
+
+		private static async Task<string> WebService2Async()
+		{
+			await Task.Delay(100);
+			return nameof(WebService2Async);
+		}
+
 
 		private static void TestCountTo()
 		{
