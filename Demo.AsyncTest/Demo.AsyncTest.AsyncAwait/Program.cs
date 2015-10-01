@@ -5,7 +5,9 @@ using Nito.AsyncEx;
 
 namespace Demo.AsyncTest.AsyncAwait
 {
-
+	/// <summary>
+	/// <see cref="http://blog.stephencleary.com/2012/02/async-and-await.html"/>
+	/// </summary>
 	public class Program
 	{
 		public static void Main(string[] args)
