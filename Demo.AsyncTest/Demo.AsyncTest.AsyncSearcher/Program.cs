@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Nito.AsyncEx;
 
 namespace Demo.AsyncTest.AsyncSearcher
 {
@@ -10,13 +12,18 @@ namespace Demo.AsyncTest.AsyncSearcher
 	{
 		public static void Main(string[] args)
 		{
+			Searcher searcher = new AnimeSearcher();
+			Task<ISearchResponse> task = searcher.SearchAsync("Full metal panic");
 
+			AsyncContext.Run(() => task).PrintSearchTerm();
+
+			Console.Read();
 		}
 	}
 
 	public interface ISearchResponse
 	{
-		void Foo();
+		void PrintSearchTerm();
 	}
 
 	public class AnimeSearchResponse : ISearchResponse
@@ -28,7 +35,10 @@ namespace Demo.AsyncTest.AsyncSearcher
 			SearchTerm = searchTerm;
 		}
 
-		public void Foo() { }
+		public void PrintSearchTerm()
+		{
+			Console.WriteLine(SearchTerm);
+		}
 	}
 
 	public abstract class Searcher
@@ -46,7 +56,9 @@ namespace Demo.AsyncTest.AsyncSearcher
 
 		public async override Task<ISearchResponse> SearchAsync(string searchTerm)
 		{
-			return new AnimeSearchResponse(searchTerm);
+			Func<ISearchResponse> function = () => new AnimeSearchResponse(searchTerm);
+			Task<ISearchResponse> task = Task.Run(function);
+			return await task;
 		}
 	}
 }
