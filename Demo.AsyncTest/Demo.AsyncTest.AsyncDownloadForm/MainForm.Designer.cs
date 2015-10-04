@@ -31,6 +31,7 @@
 			this.closeButton = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.resultTextBox = new System.Windows.Forms.TextBox();
+			this.exceptionButton = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// closeButton
@@ -66,11 +67,23 @@
 			this.resultTextBox.Size = new System.Drawing.Size(445, 315);
 			this.resultTextBox.TabIndex = 2;
 			// 
+			// exceptionButton
+			// 
+			this.exceptionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+			this.exceptionButton.Location = new System.Drawing.Point(207, 345);
+			this.exceptionButton.Name = "exceptionButton";
+			this.exceptionButton.Size = new System.Drawing.Size(75, 23);
+			this.exceptionButton.TabIndex = 3;
+			this.exceptionButton.Text = "Exception";
+			this.exceptionButton.UseVisualStyleBackColor = true;
+			this.exceptionButton.Click += new System.EventHandler(this.exceptionButton_Click);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(475, 380);
+			this.Controls.Add(this.exceptionButton);
 			this.Controls.Add(this.resultTextBox);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.closeButton);
@@ -86,6 +99,7 @@
 		private System.Windows.Forms.Button closeButton;
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.TextBox resultTextBox;
+		private System.Windows.Forms.Button exceptionButton;
 	}
 }
 
