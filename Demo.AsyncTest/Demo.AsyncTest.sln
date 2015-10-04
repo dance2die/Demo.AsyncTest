@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.AsyncTest.AsyncAwait",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.AsyncTest.AsyncSearcher", "Demo.AsyncTest.AsyncSearcher\Demo.AsyncTest.AsyncSearcher.csproj", "{4474B71D-DFA3-41D0-866E-3DE11F1BDE00}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.AsyncTest.AsyncDownloadForm", "Demo.AsyncTest.AsyncDownloadForm\Demo.AsyncTest.AsyncDownloadForm.csproj", "{7E14D31C-5107-410D-9E1C-7C3C99443304}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4474B71D-DFA3-41D0-866E-3DE11F1BDE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4474B71D-DFA3-41D0-866E-3DE11F1BDE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4474B71D-DFA3-41D0-866E-3DE11F1BDE00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E14D31C-5107-410D-9E1C-7C3C99443304}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E14D31C-5107-410D-9E1C-7C3C99443304}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E14D31C-5107-410D-9E1C-7C3C99443304}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E14D31C-5107-410D-9E1C-7C3C99443304}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
