@@ -19,12 +19,14 @@ namespace Demo.AsyncTest.AsyncDownloadForm
 
 		private async void downloadButton_Click(object sender, EventArgs e)
 		{
+			resultTextBox.Text = string.Empty;
+
 			// http://www.dotnetperls.com/httpclient
 			using (var client = new HttpClient())
 			using (HttpResponseMessage responseMessage = await client.GetAsync("http://www.huffingtonpost.com/feeds/index.xml"))
 			using (HttpContent content = responseMessage.Content)
 			{
-				await Task.Delay(5000);
+				await Task.Delay(3000);
 				string result = await content.ReadAsStringAsync();
 				resultTextBox.Text = result;
 			}
