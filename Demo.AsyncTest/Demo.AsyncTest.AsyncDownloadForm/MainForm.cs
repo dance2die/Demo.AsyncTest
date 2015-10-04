@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Demo.AsyncTest.AsyncDownloadForm
@@ -23,6 +24,7 @@ namespace Demo.AsyncTest.AsyncDownloadForm
 			using (HttpResponseMessage responseMessage = await client.GetAsync("http://www.huffingtonpost.com/feeds/index.xml"))
 			using (HttpContent content = responseMessage.Content)
 			{
+				await Task.Delay(5000);
 				string result = await content.ReadAsStringAsync();
 				resultTextBox.Text = result;
 			}
