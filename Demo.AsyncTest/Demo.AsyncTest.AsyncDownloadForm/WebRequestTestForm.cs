@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,7 +27,18 @@ namespace Demo.AsyncTest.AsyncDownloadForm
 		/// </remarks>
 		private async void processButton_Click(object sender, EventArgs e)
 		{
+			resultTextBox.Text = string.Empty;
 
+			HttpWebRequest request = WebRequest.Create("http://www.stackoverflow.com") as HttpWebRequest;
+
+			using (HttpWebResponse response = (HttpWebResponse) await Task.Factory.FromAsync<WebResponse>(
+				request.BeginGetResponse, request.EndGetResponse, request))
+			using (Stream responseStream = response.GetResponseStream())
+			using (StreamReader reader = new StreamReader(responseStream))
+			{
+				string content = await reader.ReadToEndAsync();
+				resultTextBox.Text = content;
+			}
 		}
 	}
 }

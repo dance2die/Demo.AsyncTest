@@ -30,6 +30,7 @@
 		{
 			this.closeButton = new System.Windows.Forms.Button();
 			this.processButton = new System.Windows.Forms.Button();
+			this.resultTextBox = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// closeButton
@@ -54,16 +55,29 @@
 			this.processButton.UseVisualStyleBackColor = true;
 			this.processButton.Click += new System.EventHandler(this.processButton_Click);
 			// 
+			// resultTextBox
+			// 
+			this.resultTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.resultTextBox.Location = new System.Drawing.Point(13, 13);
+			this.resultTextBox.Multiline = true;
+			this.resultTextBox.Name = "resultTextBox";
+			this.resultTextBox.Size = new System.Drawing.Size(432, 273);
+			this.resultTextBox.TabIndex = 2;
+			// 
 			// WebRequestTestForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(457, 327);
+			this.Controls.Add(this.resultTextBox);
 			this.Controls.Add(this.processButton);
 			this.Controls.Add(this.closeButton);
 			this.Name = "WebRequestTestForm";
 			this.Text = "WebRequestTestForm";
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -71,5 +85,6 @@
 
 		private System.Windows.Forms.Button closeButton;
 		private System.Windows.Forms.Button processButton;
+		private System.Windows.Forms.TextBox resultTextBox;
 	}
 }
