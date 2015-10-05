@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -30,6 +31,15 @@ namespace Demo.AsyncTest.AsyncDownloadForm
 			resultTextBox.Text = string.Empty;
 
 			HttpWebRequest request = WebRequest.Create("http://www.stackoverflow.com") as HttpWebRequest;
+			string postdata = "test";
+			byte[] data = Encoding.UTF8.GetBytes(postdata);
+			request.ContentLength = data.Length;
+			request.Method = "POST";
+
+			using (Stream requestStream = await Task<Stream>.Factory.FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, request))
+			{
+				await requestStream.WriteAsync(data, 0, data.Length);
+			}
 
 			using (HttpWebResponse response = (HttpWebResponse) await Task.Factory.FromAsync<WebResponse>(
 				request.BeginGetResponse, request.EndGetResponse, request))
