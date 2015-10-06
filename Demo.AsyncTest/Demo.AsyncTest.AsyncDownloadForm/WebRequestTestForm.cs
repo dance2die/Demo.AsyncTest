@@ -29,18 +29,17 @@ namespace Demo.AsyncTest.AsyncDownloadForm
 		private async void processButton_Click(object sender, EventArgs e)
 		{
 			resultTextBox.Text = string.Empty;
+			const string postdata = "test";
 
-			HttpWebRequest request = WebRequest.Create("http://www.stackoverflow.com") as HttpWebRequest;
-			string postdata = "test";
-			byte[] data = Encoding.UTF8.GetBytes(postdata);
-			request.ContentLength = data.Length;
-			request.Method = "POST";
+			byte[] data = GetDataBytes(postdata);
+			HttpWebRequest request = GetPostWebRequest(data);
 
-			using (Stream requestStream = await Task<Stream>.Factory.FromAsync(request.BeginGetRequestStream, request.EndGetRequestStream, request))
-			{
-				await requestStream.WriteAsync(data, 0, data.Length);
-			}
+			await WriteDataToRequestStream(request, data);
+			await SendResponse(request);
+		}
 
+		private async Task SendResponse(HttpWebRequest request)
+		{
 			using (HttpWebResponse response = (HttpWebResponse) await Task.Factory.FromAsync<WebResponse>(
 				request.BeginGetResponse, request.EndGetResponse, request))
 			using (Stream responseStream = response.GetResponseStream())
@@ -49,6 +48,28 @@ namespace Demo.AsyncTest.AsyncDownloadForm
 				string content = await reader.ReadToEndAsync();
 				resultTextBox.Text = content;
 			}
+		}
+
+		private async Task WriteDataToRequestStream(HttpWebRequest request, byte[] data)
+		{
+			using (Stream requestStream = await Task<Stream>.Factory.FromAsync(
+				request.BeginGetRequestStream, request.EndGetRequestStream, request))
+			{
+				await requestStream.WriteAsync(data, 0, data.Length);
+			}
+		}
+
+		private HttpWebRequest GetPostWebRequest(byte[] data)
+		{
+			HttpWebRequest request = WebRequest.Create("http://www.stackoverflow.com") as HttpWebRequest;
+			request.ContentLength = data.Length;
+			request.Method = "POST";
+			return request;
+		}
+
+		private byte[] GetDataBytes(string data)
+		{
+			return Encoding.UTF8.GetBytes(data);
 		}
 	}
 }
